@@ -1,95 +1,46 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [title, setTitle] = useState('Please Complete the form');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission
+  };
+
+  const handleFormComplete = (e) => {
+    setTitle('Thank you for your submission');
+    setName('');
+    setPhone('');
+    setEmail('');
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      <h1>{title}</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">姓名:</label>
+        <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <label htmlFor="gender">性别:</label>
+        <select id="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)}>
+          <option value="male">男</option>
+          <option value="female">女</option>
+        </select>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+        <label htmlFor="phone">电话:</label>
+        <input type="tel" id="phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+        <label htmlFor="email">邮箱:</label>
+        <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <button type="submit" onClick={handleFormComplete}>提交</button>
+      </form>
     </main>
   );
 }
